@@ -1,0 +1,26 @@
+spring:
+    application:
+        name: config-server
+    profiles:
+        active: native
+    cloud:
+        config:
+            server:
+                bootstrap: false
+                native:
+                    search-locations: file:/opt/docker/conf #管理的本地配置文件路径
+server:
+    port: 3020
+    tomcat:
+        uri-encoding: UTF-8
+eureka:
+    instance:
+        prefer-ip-address: true
+        lease-renewal-interval-in-seconds: 30
+        lease-expiration-duration-in-seconds: 90
+    client:
+        register-with-eureka: true
+        fetch-registry: true
+        service-url:
+#            defaultZone: http://192.168.7.100:3001/eureka,http://192.168.7.100:3002/eureka
+            defaultZone: ${EUREKA_SERVER_URL}
